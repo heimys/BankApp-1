@@ -44,4 +44,14 @@ public class DataSaverInMemory implements IDataSaver {
     public void addTransaction(Transaction transaction) {
         DataInMemory.getInstance().addTransaction(transaction);
     }
+
+    @Override
+    public Double getBalanceByAccount(Integer accountId) {
+        return DataInMemory.getInstance().getBalance(accountId);
+    }
+
+    @Override
+    public void setBalanceByAccount(Integer accountId, Double balance) {
+        DataInMemory.getInstance().setBalance(accountId, balance);
+    }
 }
