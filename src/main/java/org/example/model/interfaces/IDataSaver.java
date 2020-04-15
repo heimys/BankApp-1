@@ -20,4 +20,8 @@ public interface IDataSaver {
     Transaction getTransactionByAccountId(int accountId);
 
     void addTransaction(Transaction transaction);
+
+    Double getBalanceByAccount(Integer accountId);
+
+    void setBalanceByAccount(Integer accountId, Double balance);
 }

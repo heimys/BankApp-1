@@ -75,10 +75,13 @@ public class ConsoleApp {
                         closeApp = true;
                         break;
                     case 'B':
-                        print("My Balance is ...");
+                        getBalance(accountId);
                         break;
                     case 'W':
                         withdraw(scanner, accountId);
+                        break;
+                    case 'D':
+                        deposit(scanner, accountId);
                         break;
                     default:
                         print(option + " is an invalid option");
@@ -95,6 +98,12 @@ public class ConsoleApp {
         }
     }
 
+    private void getBalance(int accountId) {
+        double balance = bankAccountController.getBalance(accountId);
+        System.out.println("Your balance is: " + balance);
+
+    }
+
     private char getSelectedOption(Scanner scanner) {
         return scanner.next().trim().toUpperCase().charAt(0);
     }
@@ -104,5 +113,12 @@ public class ConsoleApp {
         double amount = scanner.nextDouble();
         bankAccountController.withdraw(accountId, amount);
         System.out.println("successful withdraw operation");
+    }
+
+    private void deposit(Scanner scanner, int accountId) {
+        System.out.print("Enter amount you need to deposit: ");
+        double amount = scanner.nextDouble();
+        bankAccountController.deposit(accountId, amount);
+        System.out.println("successful deposit operation");
     }
 }

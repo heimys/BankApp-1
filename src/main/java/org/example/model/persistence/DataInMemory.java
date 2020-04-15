@@ -6,11 +6,13 @@ import org.example.model.Transaction;
 import org.example.model.TransactionType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 public class DataInMemory {
     private static DataInMemory INSTANCE;
+    private HashMap<Integer, Double> balances;
     private List<Owner> owners;
     private List<Account> accounts;
     private List<Transaction> transactions;
@@ -19,6 +21,7 @@ public class DataInMemory {
         owners = new ArrayList<>();
         accounts = new ArrayList<>();
         transactions = new ArrayList<>();
+        balances = new HashMap<>();
 
         populateData();
     }
@@ -41,6 +44,8 @@ public class DataInMemory {
         Transaction transaction2 = new Transaction(TransactionType.WITHDRAW, 50.0, account1.getId());
         transactions.add(transaction2);
         account1.addTransaction(transaction2);
+
+        balances.put(account1.getId(), 9950.0);
     }
 
     public static DataInMemory getInstance() {
@@ -81,5 +86,13 @@ public class DataInMemory {
         if (account.isPresent()) {
             account.get().addTransaction(transaction);
         }
+    }
+
+    public Double getBalance(Integer accountId) {
+        return balances.get(accountId);
+    }
+
+    public void setBalance(Integer accountId, Double balance) {
+        balances.put(accountId, balance);
     }
 }
